@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../../model/account.dart';
 import '../../model/post.dart';
 
@@ -46,14 +47,56 @@ class _TimeLinePageState extends State<TimeLinePage> {
         backgroundColor: Theme.of(context).canvasColor,
         elevation: 2,
       ),
-      body: Container(),
+      body: ListView.builder(
+          itemCount: postlist.length,
+          itemBuilder: (context, index) {
+            return Container(
+              decoration: BoxDecoration(
+                border: index == 0 ? Border(
+                  top: BorderSide(color: Colors.grey, width: 0),
+                  bottom: BorderSide(color: Colors.grey, width: 0),
+                ) : Border(bottom: BorderSide(color: Colors.grey, width: 0),)
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 22,
+                    foregroundImage: NetworkImage(myAccount.imagePath),
+                  ),
+                  Expanded(
+                    child: Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    myAccount.name,style: TextStyle(
+                                      fontWeight: FontWeight.bold
+                                      ),
+                                    ),
+                                    Text(
+                                      '@${myAccount.userId}',
+                                        style: TextStyle(color: Colors.grey),
+                                      ),
+                                  ],
+                                ),
+                                Text(DateFormat('M/d/yy').format(postlist[index].createdTime!))
+                            ],
+                          ),
+                          Text(postlist[index].content),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            );
+          }),
     );
   }
 }
-/*ListView.builder(
-          itemCount: postlist.length,
-          itemBuilder: (context, index) {
-            return Scaffold(
-              body: Container(),
-            );
-          }),*/
