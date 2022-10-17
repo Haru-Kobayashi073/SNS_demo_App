@@ -47,5 +47,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>写真ファイルへのアクセスが必要です。</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires to add file to your camera</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app requires to add file to your photo Library your microphone</string>
 </dict>
 </plist>

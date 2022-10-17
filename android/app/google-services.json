@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "859797299025",
+    "project_id": "sns-demo-app-8b69e",
+    "storage_bucket": "sns-demo-app-8b69e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:859797299025:android:2356eeaf92d60e69d0fd70",
+        "android_client_info": {
+          "package_name": "com.example.twitter_demo_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "859797299025-djr4v8a4hor49kr7jois41ctvocd0j5k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkS9gHbBKvHxWfXg_lYlOHCd3kJHJDfAw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "859797299025-djr4v8a4hor49kr7jois41ctvocd0j5k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
