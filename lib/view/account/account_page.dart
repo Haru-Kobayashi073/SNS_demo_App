@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:twitter_demo_app/main.dart';
 import 'package:twitter_demo_app/model/account.dart';
 import 'package:twitter_demo_app/model/post.dart';
-
+//
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
 
@@ -42,51 +43,133 @@ class _AccountPageState extends State<AccountPage> {
     return Scaffold(
       body: Scaffold(
         body: SafeArea(
-          child: Column(
-            children: [
-              Container(
-                color: Colors.red.withOpacity(0.3),
-                height: 200,
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: SingleChildScrollView(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(left: 15, right: 15, top: 20),
+                    height: 200,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            CircleAvatar(
-                              radius: 32,
-                              foregroundImage: NetworkImage(myAccount.imagePath),
-                            ),
-                            SizedBox(width: 10,),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            Row(
                               children: [
-                                Text(
-                                  myAccount.name, style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                Text(
-                                  '@${myAccount.userId}',
-                                  style: TextStyle(
-                                    color: Colors.grey
-                                    ),
-                                  ),
+                                CircleAvatar(
+                                  radius: 32,
+                                  foregroundImage: NetworkImage(myAccount.imagePath),
+                                ),
+                                SizedBox(width: 10,),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      myAccount.name, style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    Text(
+                                      '@${myAccount.userId}',
+                                      style: TextStyle(
+                                        color: Colors.grey
+                                        ),
+                                      ),
+                                  ],
+                                ),
                               ],
                             ),
                             OutlinedButton(onPressed: () {
-                              
-                            }, child: Text('編集')),
+                                  
+                                }, child: Text('編集')),
                           ],
                         ),
+                        SizedBox(height: 15),
+                        Text(myAccount.selfIntroduction),
                       ],
-                    )
-                  ],
-                ),
-              )
-            ],
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      border: Border(bottom: BorderSide(
+                        color: Colors.blue,
+                        width: 3,
+                      )
+                    )),
+                    child: Text(
+                      '投稿',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: postlist.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                  decoration: BoxDecoration(
+                      border: index == 0
+                          ? Border(
+                              top: BorderSide(color: Colors.grey, width: 0),
+                              bottom: BorderSide(color: Colors.grey, width: 0),
+                            )
+                          : Border(
+                              bottom: BorderSide(color: Colors.grey, width: 0),
+                            )),
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 22,
+                        foregroundImage: NetworkImage(myAccount.imagePath),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        myAccount.name,
+                                        style:
+                                            TextStyle(fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        '@${myAccount.userId}',
+                                        style: TextStyle(color: Colors.grey),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(DateFormat('M/d/yy')
+                                      .format(postlist[index].createdTime!))
+                                ],
+                              ),
+                              Text(postlist[index].content),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                );
+                      }),
+                    ),
+                ],
+              ),
+            ),
           ),
         ),
       ),
