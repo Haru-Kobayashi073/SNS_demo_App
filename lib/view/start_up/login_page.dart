@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:twitter_demo_app/view/screen.dart';
 import 'package:twitter_demo_app/view/start_up/create_account_page.dart';
 
+import '../../utils/authentication.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -72,12 +74,16 @@ class _LoginPageState extends State<LoginPage> {
                 height: 70,
               ),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
+                onPressed: () async{
+                  var result = await Authentication.emailSignIn(email: emailController.text, pass: passController.text);
+                  if(result == true) {
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => Screen(),
                       ));
+                  }
+                  
                 },
                 child: Text('emailでログイン'),
               )

@@ -1,6 +1,9 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:twitter_demo_app/utils/authentication.dart';
 
 class CreateAccountPage extends StatefulWidget {
   const CreateAccountPage({super.key});
@@ -25,6 +28,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
     }
   }
 
+  Future<void> uploadImage(String uid) async {
+    final FirebaseStorage storageInstance = FirebaseStorage.instance;
+    final Reference ref = storageInstance.ref();
+    await ref.child(uid).putFile(image!);
+    String downloadUrl = await storageInstance.ref(uid).getDownloadURL();
+    print('image_path: $downloadUrl');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,11 +57,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                 height: 30,
               ),
               GestureDetector(
-                onTap: () {
-                  GetImageFromGallery();
+                onTap: () async{
+                  await GetImageFromGallery();
+                  setState(() {
+                    
+                  });
                 },
                 child: CircleAvatar(
-                  foregroundImage: image == null ? null: FileImage(image!),
+                  foregroundImage: image == null ? null : FileImage(image!),
                   radius: 40,
                   child: Icon(Icons.add),
                 ),
@@ -100,14 +114,20 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                 height: 50,
               ),
               ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (nameController.text.isNotEmpty &&
                         userIdController.text.isNotEmpty &&
                         selfIntroductionController.text.isNotEmpty &&
                         emailController.text.isNotEmpty &&
                         passController.text.isNotEmpty &&
                         image != null) {
-                      Navigator.pop(context);
+                      var result = await Authentication.signUp(
+                          email: emailController.text,
+                          pass: passController.text);
+                      if (result is UserCredential) {
+                        await uploadImage(result.user!.uid);
+                        Navigator.pop(context);
+                      }
                     }
                   },
                   child: Text('アカウントを作成')),
