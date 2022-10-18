@@ -1,11 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Account {
   String id; //ユーザーを特定するためのID
   String name;
   String imagePath; //プロフィール画像
   String selfIntroduction;
   String userId;
-  DateTime? createdTime;
-  DateTime? updatedTime;
+  Timestamp? createdTime;
+  Timestamp? updatedTime;
 
   Account(
       {this.id = '',
