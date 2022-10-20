@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:twitter_demo_app/utils/authentication.dart';
+import 'package:twitter_demo_app/utils/firestore/posts.dart';
 import '../../model/account.dart';
 
 class UserFirestore {
@@ -63,5 +64,36 @@ class UserFirestore {
       print('ユーザー情報更新エラー$e');
       return false;
     }
+  }
+
+  static Future<Map<String, Account>?> getPostUserMap(
+      List<String> accountIds) async {
+    Map<String, Account> map = {};
+    try {
+      await Future.forEach(accountIds, (String accountId) async {
+        var doc = await users.doc(accountId).get();
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        Account postAccount = Account(
+          id: accountId,
+          name: data['name'],
+          userId: data['user_id'],
+          imagePath: data['image_path'],
+          selfIntroduction: data['self_introduction'],
+          createdTime: data['created_time'],
+          updatedTime: data['updated_time'],
+        );
+        map[accountId] = postAccount;
+      });
+      print('投稿ユーザーの情報取得完了');
+      return map;
+    } on FirebaseException catch (e) {
+      print('投稿ユーザーの情報取得エラー: $e');
+      return null;
+    }
+  }
+
+  static Future<void> deleteUser(String accountId) async {
+    await users.doc(accountId).delete();
+    PostFirestore.deletePosts(accountId);
   }
 }

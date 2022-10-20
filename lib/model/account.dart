@@ -8,6 +8,7 @@ class Account {
   String userId;
   Timestamp? createdTime;
   Timestamp? updatedTime;
+  //Firestoreにユーザーを追加
 
   Account(
       {this.id = '',

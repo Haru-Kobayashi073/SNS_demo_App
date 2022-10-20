@@ -32,4 +32,12 @@ class Authentication {
       return false;
     }
   }
+
+  static Future<void> signOut() async {
+    await _firebaseAuth.signOut();
+  }
+
+  static Future<void> deleteAuth() async {
+    await currentFirebaseUser!.delete();
+  }
 }
