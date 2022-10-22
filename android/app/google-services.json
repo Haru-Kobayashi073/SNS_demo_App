@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "859797299025-ho2fj394ke00vij66qqa78a93ui4bap9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.twitter_demo_app",
+            "certificate_hash": "a26ce74633afd3c238b6e2a59154c98f2c0b5a44"
+          }
+        },
+        {
           "client_id": "859797299025-djr4v8a4hor49kr7jois41ctvocd0j5k.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "859797299025-djr4v8a4hor49kr7jois41ctvocd0j5k.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "859797299025-8mddh95vu0q74bjr1va42uclmm474hdl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.twitterDemoApp"
+              }
             }
           ]
         }

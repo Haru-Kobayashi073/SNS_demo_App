@@ -53,5 +53,16 @@
 	<string>This app requires to add file to your camera</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This app requires to add file to your photo Library your microphone</string>
+	<key>CFBundleURLTypes</key>
+<array>
+	<dict>
+		<key>CFBundleTypeRole</key>
+		<string>Editor</string>
+		<key>CFBundleURLSchemes</key>
+		<array>
+			<string>com.googleusercontent.apps.859797299025-8mddh95vu0q74bjr1va42uclmm474hdl</string>
+		</array>
+	</dict>
+</array>
 </dict>
 </plist>

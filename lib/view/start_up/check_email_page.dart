@@ -24,7 +24,7 @@ class _CheckEmailPageState extends State<CheckEmailPage> {
           onPressed: () async {
             var result = await Authentication.emailSignIn(
                 email: widget.email, pass: widget.pass);
-            if (result == UserCredential) {
+            if (result is UserCredential) {
               if (result.user!.emailVerified == true) {
                 while (Navigator.canPop(context)) {
                   Navigator.pop(context);
