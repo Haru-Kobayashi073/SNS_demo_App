@@ -9,7 +9,7 @@ import 'package:twitter_demo_app/utils/firestore/users.dart';
 import 'package:twitter_demo_app/view/account/edit_account_page.dart';
 import '../../model/account.dart';
 
-//
+
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
 
@@ -80,7 +80,8 @@ class _AccountPageState extends State<AccountPage> {
                                     });
                                   }
                                 },
-                                child: Text('編集')),
+                                child: Text('編集')
+                              ),
                           ],
                         ),
                         SizedBox(height: 15),

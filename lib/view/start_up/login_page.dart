@@ -5,7 +5,6 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:twitter_demo_app/utils/firestore/users.dart';
 import 'package:twitter_demo_app/view/screen.dart';
 import 'package:twitter_demo_app/view/start_up/create_account_page.dart';
-
 import '../../utils/authentication.dart';
 
 class LoginPage extends StatefulWidget {
