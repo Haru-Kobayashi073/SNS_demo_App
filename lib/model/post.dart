@@ -5,10 +5,12 @@ class Post {
   String content;
   String postAccountId;
   Timestamp? createdTime;
+  String video;
 
   Post(
       {this.id = '',
       this.content = '',
       this.postAccountId = '',
-      this.createdTime});
+      this.createdTime,
+      this.video = '',});
 }

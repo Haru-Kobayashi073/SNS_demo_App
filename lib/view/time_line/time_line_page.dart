@@ -1,9 +1,10 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:twitter_demo_app/utils/firestore/posts.dart';
 import 'package:twitter_demo_app/utils/firestore/users.dart';
-import 'package:twitter_demo_app/view/time_line/post_page.dart';
 import '../../model/account.dart';
 import '../../model/post.dart';
 
@@ -15,6 +16,9 @@ class TimeLinePage extends StatefulWidget {
 }
 
 class _TimeLinePageState extends State<TimeLinePage> {
+  TextEditingController videoController = TextEditingController();
+  File? image;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +32,9 @@ class _TimeLinePageState extends State<TimeLinePage> {
         elevation: 2,
       ),
       body: StreamBuilder<QuerySnapshot>(
-          stream: PostFirestore.posts.orderBy('created_time', descending: true).snapshots(),
+          stream: PostFirestore.posts
+              .orderBy('created_time', descending: true)
+              .snapshots(),
           builder: (context, postSnapshot) {
             if (postSnapshot.hasData) {
               List<String> postAccountIds = [];
@@ -54,31 +60,36 @@ class _TimeLinePageState extends State<TimeLinePage> {
                               content: data['content'],
                               postAccountId: data['post_account_id'],
                               createdTime: data['created_time'],
+                              // video: data['video'],
                             );
                             Account postAccount =
                                 userSnapshot.data![post.postAccountId]!;
                             return Container(
                               decoration: BoxDecoration(
                                   border: index == 0
-                                      ? Border(//indexが０だったら
+                                      ? Border(
+                                          //indexが０だったら
                                           top: BorderSide(
                                               color: Colors.grey, width: 0),
                                           bottom: BorderSide(
                                               color: Colors.grey, width: 0),
                                         )
-                                      : Border(//indexが1以上だったら
+                                      : Border(
+                                          //indexが1以上だったら
                                           bottom: BorderSide(
                                               color: Colors.grey, width: 0),
                                         )),
                               padding: EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 15),
                               child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CircleAvatar(
                                     radius: 22,
                                     foregroundImage:
                                         NetworkImage(postAccount.imagePath),
                                   ),
+                                  SizedBox(width: 10,),
                                   Expanded(
                                     child: Container(
                                       child: Column(
@@ -109,6 +120,16 @@ class _TimeLinePageState extends State<TimeLinePage> {
                                             ],
                                           ),
                                           Text(post.content),
+                                          // image == null ? Container() : Container(
+                                          //   height: 270,
+                                          //   width: 360,
+                                          //   child: Image(image: NetworkImage(post.video)),
+                                          // ),
+                                          post.video == null ? Container() : Container(
+                                            height: 270,
+                                            width: 360,
+                                            child: Image.network('https://www.broadmedia.co.jp/news/img/20220428_01.png'),
+                                          ),
                                         ],
                                       ),
                                     ),

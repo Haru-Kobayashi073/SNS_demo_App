@@ -16,6 +16,7 @@ class PostFirestore {
         'content': newPost.content,
         'post_account_id': newPost.postAccountId,
         'created_time': Timestamp.now(),
+        'video': newPost.video,
       });
       _userPosts
           .doc(result.id)
@@ -39,6 +40,7 @@ class PostFirestore {
           content: data['content'],
           postAccountId: data['post_account_id'],
           createdTime: data['created_time'],
+          video: data['video'],
         );
         postList.add(post);
       });
