@@ -17,6 +17,7 @@ class _PostPageState extends State<PostPage> {
   TextEditingController contentController = TextEditingController();
   TextEditingController videoController = TextEditingController();
   File? image;
+  File? video; 
 
   @override
   Widget build(BuildContext context) {
@@ -42,36 +43,40 @@ class _PostPageState extends State<PostPage> {
             ),
             GestureDetector(
               onTap: () async {
-                  var result = await FunctionUtils.GetImageFromGallery();
-                  if (result != null) {
-                    setState(() {
-                      image = File(result.path);
-                    });
-                  }
-                },
-              child: image == null ? Container(
-                height: 270,
-                width: 360,
-                color: Color.fromARGB(255, 213, 210, 210),
-                child: Icon(
-                  Icons.add_photo_alternate_outlined,
-                  color: Colors.white,
-                  size: 100,
-                  )) : Container(
-                height: 270,
-                width: 360,
-                child: Image.file(image!, fit: BoxFit.cover),
-                ),
+                var result = await FunctionUtils.getImageFromGallery();
+                if (result != null) {
+                  setState(() {
+                    video = File(result.path);
+                  });
+                }
+              },
+              child: video == null
+                  ? Container(
+                      height: 270,
+                      width: 360,
+                      color: Color.fromARGB(255, 213, 210, 210),
+                      child: Icon(
+                        Icons.add_photo_alternate_outlined,
+                        color: Colors.white,
+                        size: 100,
+                      ))
+                  : Container(
+                      height: 270,
+                      width: 360,
+                      child: Image.file(video!, fit: BoxFit.cover),
+                    ),
             ),
             SizedBox(
               height: 100,
             ),
             ElevatedButton(
                 onPressed: () async {
-                  if (contentController.text.isNotEmpty) {
+                  if (contentController.text.isNotEmpty
+                  ) {
                     Post newPost = Post(
                       content: contentController.text,
                       postAccountId: Authentication.myAccount!.id,
+                      video: video!.path
                     );
                     var result = await PostFirestore.addPost(newPost);
                     if (result == true) {
@@ -86,20 +91,3 @@ class _PostPageState extends State<PostPage> {
     );
   }
 }
-
-// GestureDetector(
-//               onTap: () async {
-//                   var result = await FunctionUtils.GetImageFromGallery();
-//                   if (result != null) {
-//                     setState(() {
-//                       image = File(result.path);
-//                     });
-//                   }
-//                 },
-//               child: Container(
-                
-//                 width: 360,
-//                 height: 270,
-//                 color: Colors.grey,
-//               ),
-//             ),

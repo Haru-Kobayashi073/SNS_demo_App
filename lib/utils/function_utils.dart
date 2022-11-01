@@ -3,7 +3,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 class FunctionUtils {
-  static Future<dynamic> GetImageFromGallery() async {
+  static Future<dynamic> getImageFromGallery() async {
     ImagePicker picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     return pickedFile;
@@ -16,5 +16,5 @@ class FunctionUtils {
     String downloadUrl = await storageInstance.ref(uid).getDownloadURL();
     print('image_path: $downloadUrl');
     return downloadUrl;
-  }
+  }//引数のおかげでストレージにputfileできて、urlも取得？
 }

@@ -32,7 +32,7 @@ class Authentication {
       print('authサインインエラー$e');
       return false;
     }
-  }
+  }//ログイン
 
   static Future<void> signOut() async {
     await _firebaseAuth.signOut();

@@ -40,11 +40,11 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
               ),
               GestureDetector(
                 onTap: () async {
-                  var result = await FunctionUtils.GetImageFromGallery();
+                  var result = await FunctionUtils.getImageFromGallery();
                   if (result != null) {
                     setState(() {
                       image = File(result.path);
-                    });
+                    });//resultのpathをimageに代入
                   }
                 },
                 child: CircleAvatar(

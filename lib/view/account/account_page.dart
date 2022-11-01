@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:twitter_demo_app/main.dart';
 import 'package:twitter_demo_app/model/post.dart';
 import 'package:twitter_demo_app/utils/authentication.dart';
 import 'package:twitter_demo_app/utils/firestore/posts.dart';
