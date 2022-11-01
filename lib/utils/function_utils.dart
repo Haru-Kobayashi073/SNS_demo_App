@@ -17,4 +17,13 @@ class FunctionUtils {
     print('image_path: $downloadUrl');
     return downloadUrl;
   }//引数のおかげでストレージにputfileできて、urlも取得？
+
+  static Future<String> uploadVideo(String uid, File video) async {
+    final FirebaseStorage storageInstance = FirebaseStorage.instance;
+    final Reference ref = storageInstance.ref();
+    await ref.child(uid).putFile(video);
+    String downloadUrl = await storageInstance.ref(uid).getDownloadURL();
+    print('video_path: $downloadUrl');
+    return downloadUrl;
+  }
 }

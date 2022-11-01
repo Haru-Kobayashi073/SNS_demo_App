@@ -16,7 +16,7 @@ class PostFirestore {
         'content': newPost.content,
         'post_account_id': newPost.postAccountId,
         'created_time': Timestamp.now(),
-        'video': newPost.video,
+        'video_path': newPost.videoPath,
       });
       _userPosts
           .doc(result.id)
@@ -40,7 +40,7 @@ class PostFirestore {
           content: data['content'],
           postAccountId: data['post_account_id'],
           createdTime: data['created_time'],
-          video: data['video'],
+          videoPath: data['video'],
         );
         postList.add(post);
       });
@@ -57,8 +57,9 @@ class PostFirestore {
         .collection('users')
         .doc(accountId)
         .collection('my_posts');
-    var snapshot = await _userPosts.get();//消す予定のアカウントが投稿していたData
-    snapshot.docs.forEach((doc) async {//投稿のDataの数だけForEachで繰り返す
+    var snapshot = await _userPosts.get(); //消す予定のアカウントが投稿していたData
+    snapshot.docs.forEach((doc) async {
+      //投稿のDataの数だけForEachで繰り返す
       await posts.doc(doc.id).delete();
       _userPosts.doc(doc.id).delete();
     });

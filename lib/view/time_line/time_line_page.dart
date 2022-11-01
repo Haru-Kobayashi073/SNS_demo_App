@@ -71,10 +71,10 @@ class _TimeLinePageState extends State<TimeLinePage> {
                               content: data['content'],
                               postAccountId: data['post_account_id'],
                               createdTime: data['created_time'],
-                              video: data['video'],
+                              // videoPath: data['video_path'],
                             );
                             Account postAccount =
-                                userSnapshot.data![post.postAccountId]!;
+                                userSnapshot.data![post.postAccountId]!;//IDにひも付いた投稿のデータを格納？
                             return Container(
                               decoration: BoxDecoration(
                                   border: index == 0
@@ -141,7 +141,7 @@ class _TimeLinePageState extends State<TimeLinePage> {
                                             width: 360,
                                             child: Image(
                                                 image: NetworkImage(
-                                                    post.video)),
+                                                    'https://www.famitsu.com/images/000/265/917/l_62b3bbe895683.jpg')),
                                           ),
                                         ],
                                       ),
@@ -161,13 +161,4 @@ class _TimeLinePageState extends State<TimeLinePage> {
           }),
     );
   }
-
-// Future<dynamic> createPost(String uid) async {
-//     String imagePath = await FunctionUtils.uploadImage(uid, image!);
-//     Post newPost = Post(
-
-//     )
-//     var _result = await UserFirestore.setUser(newAccount);
-//     return _result;
-//   }
 }

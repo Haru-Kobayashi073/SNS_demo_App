@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:twitter_demo_app/model/account.dart';
 import 'package:twitter_demo_app/model/post.dart';
 import 'package:twitter_demo_app/utils/authentication.dart';
 import 'package:twitter_demo_app/utils/firestore/posts.dart';
@@ -14,10 +15,11 @@ class PostPage extends StatefulWidget {
 }
 
 class _PostPageState extends State<PostPage> {
+  Account myAccount = Authentication.myAccount!;
   TextEditingController contentController = TextEditingController();
   TextEditingController videoController = TextEditingController();
   File? image;
-  File? video; 
+  File? video;
 
   @override
   Widget build(BuildContext context) {
@@ -71,15 +73,9 @@ class _PostPageState extends State<PostPage> {
             ),
             ElevatedButton(
                 onPressed: () async {
-                  if (contentController.text.isNotEmpty
-                  ) {
-                    Post newPost = Post(
-                      content: contentController.text,
-                      postAccountId: Authentication.myAccount!.id,
-                      video: video!.path
-                    );
-                    var result = await PostFirestore.addPost(newPost);
-                    if (result == true) {
+                  if (contentController.text.isNotEmpty) {
+                    var _result = await createPost(myAccount.id);
+                    if (_result == true) {
                       Navigator.pop(context);
                     }
                   }
@@ -89,5 +85,15 @@ class _PostPageState extends State<PostPage> {
         ),
       ),
     );
+  }
+
+  Future<dynamic> createPost(String uid) async {
+    String videoPath = await FunctionUtils.uploadVideo(uid, video!);
+    Post newPost = Post(
+        content: contentController.text,
+        postAccountId: Authentication.myAccount!.id,
+        videoPath: videoPath);
+    var _result = await PostFirestore.addPost(newPost);
+    return _result;
   }
 }

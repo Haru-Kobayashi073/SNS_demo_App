@@ -63,7 +63,7 @@ class UserFirestore {
     } on FirebaseException catch (e) {
       print('ユーザー情報更新エラー$e');
       return false;
-    }
+    }//Firestoreにアカウント情報登録
   }
 
   static Future<Map<String, Account>?> getPostUserMap(
