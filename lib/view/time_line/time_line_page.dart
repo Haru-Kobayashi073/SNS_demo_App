@@ -3,10 +3,8 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:twitter_demo_app/utils/authentication.dart';
 import 'package:twitter_demo_app/utils/firestore/posts.dart';
 import 'package:twitter_demo_app/utils/firestore/users.dart';
-import 'package:twitter_demo_app/utils/function_utils.dart';
 import '../../model/account.dart';
 import '../../model/post.dart';
 
@@ -71,7 +69,7 @@ class _TimeLinePageState extends State<TimeLinePage> {
                               content: data['content'],
                               postAccountId: data['post_account_id'],
                               createdTime: data['created_time'],
-                              // videoPath: data['video_path'],
+                              videoPath: data['video_path'],
                             );
                             Account postAccount =
                                 userSnapshot.data![post.postAccountId]!;//IDにひも付いた投稿のデータを格納？
@@ -141,7 +139,7 @@ class _TimeLinePageState extends State<TimeLinePage> {
                                             width: 360,
                                             child: Image(
                                                 image: NetworkImage(
-                                                    'https://www.famitsu.com/images/000/265/917/l_62b3bbe895683.jpg')),
+                                                    post.videoPath)),
                                           ),
                                         ],
                                       ),

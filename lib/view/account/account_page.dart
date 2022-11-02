@@ -8,7 +8,6 @@ import 'package:twitter_demo_app/utils/firestore/users.dart';
 import 'package:twitter_demo_app/view/account/edit_account_page.dart';
 import '../../model/account.dart';
 
-
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
 
@@ -79,8 +78,7 @@ class _AccountPageState extends State<AccountPage> {
                                     });
                                   }
                                 },
-                                child: Text('編集')
-                              ),
+                                child: Text('編集')),
                           ],
                         ),
                         SizedBox(height: 15),
@@ -190,8 +188,14 @@ class _AccountPageState extends State<AccountPage> {
                                                                     .toDate()))
                                                           ],
                                                         ),
-                                                        Text(post
-                                                            .content),
+                                                        Text(post.content),
+                                                        Container(
+                                                          height: 270,
+                                                          width: 360,
+                                                          child: Image(
+                                                              image: NetworkImage(
+                                                                  post.videoPath)),
+                                                        ),
                                                       ],
                                                     ),
                                                   ),

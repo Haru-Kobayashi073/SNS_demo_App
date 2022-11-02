@@ -21,8 +21,8 @@ class FunctionUtils {
   static Future<String> uploadVideo(String uid, File video) async {
     final FirebaseStorage storageInstance = FirebaseStorage.instance;
     final Reference ref = storageInstance.ref();
-    await ref.child(uid).putFile(video);
-    String downloadUrl = await storageInstance.ref(uid).getDownloadURL();
+    await ref.child('${'gazou' + uid}').putFile(video);
+    String downloadUrl = await storageInstance.ref('${'gazou' + uid}').getDownloadURL();
     print('video_path: $downloadUrl');
     return downloadUrl;
   }
