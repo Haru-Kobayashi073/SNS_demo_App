@@ -145,11 +145,16 @@ class _AccountPageState extends State<AccountPage> {
                                             padding: EdgeInsets.symmetric(
                                                 horizontal: 10, vertical: 15),
                                             child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 CircleAvatar(
                                                   radius: 22,
                                                   foregroundImage: NetworkImage(
                                                       myAccount.imagePath),
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
                                                 ),
                                                 Expanded(
                                                   child: Container(

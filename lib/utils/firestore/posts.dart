@@ -40,7 +40,7 @@ class PostFirestore {
           content: data['content'],
           postAccountId: data['post_account_id'],
           createdTime: data['created_time'],
-          videoPath: data['video'],
+          videoPath: data['video_path'],
         );
         postList.add(post);
       });

@@ -71,8 +71,8 @@ class _TimeLinePageState extends State<TimeLinePage> {
                               createdTime: data['created_time'],
                               videoPath: data['video_path'],
                             );
-                            Account postAccount =
-                                userSnapshot.data![post.postAccountId]!;//IDにひも付いた投稿のデータを格納？
+                            Account postAccount = userSnapshot.data![
+                                post.postAccountId]!; //IDにひも付いた投稿のデータを格納？
                             return Container(
                               decoration: BoxDecoration(
                                   border: index == 0
@@ -150,10 +150,12 @@ class _TimeLinePageState extends State<TimeLinePage> {
                             );
                           });
                     } else {
+                      print('エラー1');
                       return Container();
                     }
                   });
             } else {
+              print('エラー2');
               return Container();
             }
           }),

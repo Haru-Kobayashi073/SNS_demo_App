@@ -73,7 +73,7 @@ class _PostPageState extends State<PostPage> {
             ),
             ElevatedButton(
                 onPressed: () async {
-                  if (contentController.text.isNotEmpty) {
+                  if (contentController.text.isNotEmpty && video != null) {
                     var _result = await createPost(myAccount.id);
                     if (_result == true) {
                       Navigator.pop(context);
