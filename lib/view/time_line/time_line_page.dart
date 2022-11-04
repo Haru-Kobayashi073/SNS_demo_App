@@ -150,12 +150,12 @@ class _TimeLinePageState extends State<TimeLinePage> {
                             );
                           });
                     } else {
-                      print('エラー1');
-                      return Container();
+                      print('エラー:usersnapshot');
+                      return Container(child: Text('111'),);
                     }
                   });
             } else {
-              print('エラー2');
+              print('エラー:postsnapshot');
               return Container();
             }
           }),
